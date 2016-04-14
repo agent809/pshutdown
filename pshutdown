@@ -1,15 +1,24 @@
 #!/bin/bash
+HELP="Use -su tp generate a startup file, use -sd to perform shutdown operations..."
+if test $1 = "-sd"
+then
+	cd "/home/morpheous/programs/path"
+	pacman -Q > SHUTDOWN.txt
 
-cd "/home/morpheous/programs/path"
-pacman -Q > SHUTDOWN.txt
+	python checkFiles.py
 
-python checkFiles.py
+	echo "        Output File Created... "
+	echo ""
+	read
 
-echo "        Output File Created... "
-echo ""
-read
-
-#sudo rm -rf STARTUP.txt
-#sudo rm -rf output.txt
-#sudo rm -rf SHUTDOWN.txt
-#sudo shutdown -t now
+	#sudo rm -rf STARTUP.txt
+	#sudo rm -rf output.txt
+	#sudo rm -rf SHUTDOWN.txt
+	#sudo shutdown -t now
+elif test $1 = "-su"
+then
+	cd "/home/morpheous/programs/path"
+	pacman -Q > STARTUP.txt
+else
+	echo $HELP
+fi

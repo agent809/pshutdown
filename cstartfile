@@ -1,4 +1,0 @@
-#!/bin/bash
-
-cd "/home/morpheous/programs/path"
-pacman -Q > STARTUP.txt
