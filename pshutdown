@@ -1,0 +1,15 @@
+#!/bin/bash
+
+cd "/home/morpheous/programs/path"
+pacman -Q > SHUTDOWN.txt
+
+python checkFiles.py
+
+echo "        Output File Created... "
+echo ""
+read
+
+#sudo rm -rf STARTUP.txt
+#sudo rm -rf output.txt
+#sudo rm -rf SHUTDOWN.txt
+#sudo shutdown -t now
