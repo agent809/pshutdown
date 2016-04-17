@@ -2,7 +2,7 @@
 HELP="Use -su tp generate a startup file, use -sd to perform shutdown operations..."
 if test $1 = "-sd"
 then
-	cd "/home/morpheous/programs/path"
+	cd "$HOME/pshutdown"
 	pacman -Q > SHUTDOWN.txt
 
 	python checkFiles.py
@@ -17,7 +17,7 @@ then
 	#sudo shutdown -t now
 elif test $1 = "-su"
 then
-	cd "/home/morpheous/programs/path"
+	cd "$HOME/pshutdown"
 	pacman -Q > STARTUP.txt
 else
 	echo $HELP
