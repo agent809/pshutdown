@@ -11,9 +11,12 @@ then
 	echo ""
 	read
 
+	sudo chmod 777 revert
+	sudo ./revert
 	sudo rm -rf STARTUP.txt
 	#sudo rm -rf output.txt
 	sudo rm -rf SHUTDOWN.txt
+	sudo rm-rf revert
 	sudo shutdown -t now
 elif test $1 = "-su"
 then

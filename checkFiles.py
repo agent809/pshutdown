@@ -97,8 +97,6 @@ def main():
 					print("\t   Sorry Input Out of Range... ")
 			except:
 				print("\t   Sorry That is an Invalid Input... ")
-		for i in revert_programs:
-			print(i, end="  ")
 
 		
 if __name__ == "__main__":
