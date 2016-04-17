@@ -6,6 +6,8 @@ programs. Good for keeping clutter out of your system. Currently it only works w
 package manager, however with a little tweaking it can be used with any.
 
 INSTALL
+(note python3 must be installed and run when the python command is called, code
+can easily be changed to fix this though)
 (I am adding an installer in a later update, however for now this is required)
 To install this program correctly you must add the two files contained within the download
 to "your home folder/pshutdown" and  add that folder to your bash path. Then you have to add
