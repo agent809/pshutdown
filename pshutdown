@@ -11,10 +11,10 @@ then
 	echo ""
 	read
 
-	#sudo rm -rf STARTUP.txt
+	sudo rm -rf STARTUP.txt
 	#sudo rm -rf output.txt
-	#sudo rm -rf SHUTDOWN.txt
-	#sudo shutdown -t now
+	sudo rm -rf SHUTDOWN.txt
+	sudo shutdown -t now
 elif test $1 = "-su"
 then
 	cd "$HOME/pshutdown"
