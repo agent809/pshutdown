@@ -1,3 +1,22 @@
+def cleanup_list(list_in):
+	for i in range(0, len(list_in)):
+		list_in[i] = list_in[i].strip("\n")
+	return list_in
+		
+
+def program_check(actionPrograms, installedPrograms, removedPrograms):
+	revert = open("revert", 'w')
+	revert.write("#!/bin/bash\n")
+	for i in actionPrograms:
+		if i in installedPrograms:
+			revert.write("pacman -R \"" + i + "\"\n")
+		elif i in removedPrograms:
+			revert.write("pacman -S \"" + i + "\"\n")
+		else:
+			print(installedPrograms, removedPrograms)
+			print("Oh crap, something went seriously wrong...")
+	revert.close()
+
 def main():
 	startfile = open("STARTUP.txt", 'r')
 	shutdownfile = open("SHUTDOWN.txt", 'r')
@@ -66,6 +85,7 @@ def main():
 	while True:
 		inputNum = input("\t>> ")
 		if inputNum == 'end':
+			program_check(revert_programs, cleanup_list(installedPrograms), cleanup_list(removedPrograms))
 			break
 		else:
 			try:
@@ -77,6 +97,8 @@ def main():
 					print("\t   Sorry Input Out of Range... ")
 			except:
 				print("\t   Sorry That is an Invalid Input... ")
+		for i in revert_programs:
+			print(i, end="  ")
 
 		
 if __name__ == "__main__":
