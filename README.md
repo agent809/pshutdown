@@ -2,8 +2,8 @@
 This program is to help mange installed programs at shut the time of shut down. When you shut
 down this program will show you all the installed and removed programs that were installed/
 removed during your current session. It also gives you the option to reinstall or remove the
-programs. Good for keeping clutter out of your system. The config is setup to use the pacman
-package manager, you can change this in the config.
+programs. Good for keeping clutter out of your system. The default package manager is pacman
+however you can change this in the config.
 
 INSTALL
 (note python3 must be installed and run when the python command is called, code
