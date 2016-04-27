@@ -1,26 +1,20 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
+#define CONFIG_ERROR "An error occurred while loading the config file...\n"
 
-void readConfigFile();
-void analyze(char *inputCommand, int size);
+int readConfigFile();
+int analyze(char *inputCommand, int size);
 char installCommand[50];
 char uninstallCommand[50];
+char install[50];
+char uninstall[50];
 
 
-void analyze(char *inputCommand, int size){
+int analyze(char *inputCommand, int size){
 	char installCommand[] = "install_command";
 	char uninstallCommand[] = "remove_command";
 	int equalsPos = 0;
-
-	/*
-	//For testing
-	for (int i = 0; i < size; i++){
-		printf("%c", inputCommand[i]);
-	}
-	printf("\n");
-	*/
-
 
 	for (int i = 0; i < size; i++){
 		if (inputCommand[i] == '='){
@@ -30,7 +24,6 @@ void analyze(char *inputCommand, int size){
 			continue;
 		}
 	}
-
 
 	char newString[equalsPos];
 
@@ -43,26 +36,41 @@ void analyze(char *inputCommand, int size){
 		
 		if (equalsPos == 15){
 			if (strcmp(newString, installCommand) == 0){
-				printf("Install...\n");
+				//printf("Install...\n");
+				int cnt = 0;
+				for (int i = equalsPos + 1; i < size; i++){
+					install[cnt] = inputCommand[i];
+					cnt++;
+				}
+				install[cnt + 1] = '\0';
+				return 1;
+			}else{
+				return 0;
 			}
-			printf("%s\n", newString);
+			//printf("%s\n", newString);
 		}else if(equalsPos == 14){
 			if (strcmp(newString, uninstallCommand) == 0){
-				printf("Uninstall...\n");
+				//printf("Uninstall...\n");
+				int cnt = 0;
+				for (int i = equalsPos + 1; i < size; i++){
+					uninstall[cnt] = inputCommand[i];
+					cnt++;
+				}
+				uninstall[cnt + 1] = '\0';
+				return 1;
+			}else{
+				return 0;
 			}
 			printf("%s\n", newString);
 		}
 		printf("%d\n", equalsPos);
 	}else{
-		printf("Failure");
+		return 0;
 	}
-	/*
-	printf("\n");
-	*/
 }
 
 
-void readConfigFile(){
+int readConfigFile(){
 	FILE * fp = fopen("pshutdown.cfg", "r");
 	//Gets the size of the file
 	fseek(fp, 0, SEEK_END);
@@ -84,7 +92,10 @@ void readConfigFile(){
 		}else if (ch == '\n'){
 			continue;
 		}else if(ch == ';'){
-			analyze(file, counter);
+			if (analyze(file, counter) == 0){
+				printf("%s", CONFIG_ERROR);
+				return 0;
+			}
 			counter = 0;
 			continue;
 		}
@@ -96,15 +107,11 @@ void readConfigFile(){
 	}
 	
 	fclose(fp);
+	printf("Config file loaded...\nInstall Command: %s\nUninstall Command: %s\n", install,  uninstall);
 }
 
-void main(){
-	/*
-	char * p;
-	p = getInCommand();
-	for (int i = 0; i <= 1000; i++){
-		printf("%c", *(p + i));
+int main(){
+	if (readConfigFile() == 0){
+		return 0;
 	}
-	*/
-	readConfigFile();
 }
