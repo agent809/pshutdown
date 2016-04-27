@@ -9,10 +9,56 @@ char uninstallCommand[50];
 
 
 void analyze(char *inputCommand, int size){
+	char installCommand[] = "install_command";
+	char uninstallCommand[] = "remove_command";
+	int equalsPos = 0;
+
+	/*
+	//For testing
 	for (int i = 0; i < size; i++){
 		printf("%c", inputCommand[i]);
 	}
 	printf("\n");
+	*/
+
+
+	for (int i = 0; i < size; i++){
+		if (inputCommand[i] == '='){
+			equalsPos = i;
+			break;
+		}else{
+			continue;
+		}
+	}
+
+
+	char newString[equalsPos];
+
+	if (equalsPos != 0){
+		for (int i = 0; i < equalsPos; i++){
+			newString[i] = inputCommand[i];
+			//printf("%c", inputCommand[i]);
+		}
+		newString[equalsPos] = '\0';
+		
+		if (equalsPos == 15){
+			if (strcmp(newString, installCommand) == 0){
+				printf("Install...\n");
+			}
+			printf("%s\n", newString);
+		}else if(equalsPos == 14){
+			if (strcmp(newString, uninstallCommand) == 0){
+				printf("Uninstall...\n");
+			}
+			printf("%s\n", newString);
+		}
+		printf("%d\n", equalsPos);
+	}else{
+		printf("Failure");
+	}
+	/*
+	printf("\n");
+	*/
 }
 
 
